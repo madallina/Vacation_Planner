@@ -1,0 +1,105 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #d7f0db;
+  }
+  
+
+  .container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+
+  .app-wrapper {
+    text-align: center;
+  }
+  
+
+  .title {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+  
+
+  blockquote {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+ 
+  .destination-search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  #zoneSelector,
+  .search-temperature {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  #search-btn {
+    padding: 8px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+ 
+  .filtered-cities {
+    text-align: left;
+  }
+  
+
+  #noProposalMessage {
+    background-color: #ffcccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  .filtered-cities {
+    width: 350px;
+    margin: 20px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  .filtered-cities ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .filtered-cities li {
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .filtered-cities li:last-child {
+    border-bottom: none;
+  }
+  
+
+  .filtered-cities li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .weather-week{
+    display: flex;
+justify-content: space-evenly
+  }
+  

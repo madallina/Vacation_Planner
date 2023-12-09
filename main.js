@@ -46,7 +46,6 @@ function searchCitiesByZone(zoneName) {
 
     Promise.all(promises)
     .then(() => {
-      // All asynchronous calls are complete, trigger the render function here
       filterCitiesByTemperature(stoc);
 
     })
@@ -59,25 +58,31 @@ function searchCitiesByZone(zoneName) {
 }
 function filterCitiesByTemperature(val) {
   // debugger
-  val.forEach(val => {
+  let searchInputTxt = document.getElementById("search-input").value.trim();
 
-    let searchInputTxt = document.getElementById("search-input").value.trim();
-    let currentCity = val.location.name;
-    const isValid = val.forecast.forecastday.every(
-      (item) => item.day.maxtemp_c > searchInputTxt
-      );
-      if (isValid) {
-        filteredCities.push(currentCity);
-      }
+  if(searchInputTxt){
+    
+    val.forEach(val => {
       
-      
-      
-    })
-      renderResult(filteredCities);
+      let currentCity = val.location.name;
+      const isValid = val.forecast.forecastday.every(
+        (item) => item.day.maxtemp_c > searchInputTxt
+        );
+        if (isValid) {
+          filteredCities.push(currentCity);
+        }
+        
+        
+        
+      })
+      renderResult(filteredCities,val);
+    }else{
+      alert("Please enter a value for temperature!");
+    }
+    
 }
 
-function renderResult(nameOfCities) {
-
+function renderResult(nameOfCities, weatherData) {
   const prevResultContainer = document.querySelector(".filtered-cities");
   if (prevResultContainer) {
     prevResultContainer.remove();
@@ -85,13 +90,39 @@ function renderResult(nameOfCities) {
   const resultContainer = document.createElement("div");
   resultContainer.classList.add("filtered-cities");
   const resultList = document.createElement("ul");
+
   nameOfCities.forEach((city) => {
     const item = document.createElement("li");
     item.textContent = city;
+    const cityWeatherData = weatherData.find((data) => data.location.name === city);
+
+    if (cityWeatherData && cityWeatherData.forecast && cityWeatherData.forecast.forecastday) {
+      const forecast = cityWeatherData.forecast.forecastday;
+
+      const dayItem = document.createElement("div");
+      dayItem.classList.add("weather-week");
+
+      forecast.forEach((day) => {
+        const weatherDay=document.createElement("div");
+        weatherDay.classList.add("weather-day");
+        const weatherIcons = day.day.condition.icon;
+        const maxT=day.day.maxtemp_c;
+        const maxTemp=document.createElement("h5");
+        maxTemp.textContent=maxT + "°C";
+        const iconElement = document.createElement("img");
+        iconElement.src = "https:" + weatherIcons;
+        iconElement.alt = city + " Weather Icon";
+        weatherDay.appendChild(iconElement);
+        weatherDay.appendChild(maxTemp);
+        dayItem.appendChild(weatherDay);
+      });
+
+      item.appendChild(dayItem);
+    }
+
     resultList.appendChild(item);
   });
 
   resultContainer.appendChild(resultList);
   document.body.appendChild(resultContainer);
-  
 }
